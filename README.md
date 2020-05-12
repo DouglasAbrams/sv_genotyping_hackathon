@@ -50,5 +50,5 @@ run these methods on the data given and any test data they provide. Then compare
 We currently have a semi-working implementation of sv genotyping with svtyper in the single cell pipeline.
 
 Follow the directions for setup under the header `SV_Genotyping` on this documentation page: 
-`https://single-cell-pipeline-da.readthedocs.io/en/latest/`. You can skip the steps regarding setting-up of reference data. 
+`https://github.com/DouglasAbrams/single_cell_pipeline/blob/docs_merge/docs/source/index.md`. You can skip the steps regarding setting-up of reference data. 
 
