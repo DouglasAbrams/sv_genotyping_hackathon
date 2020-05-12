@@ -36,27 +36,19 @@ output:
 ```
 As you can see, theres an incredible amount of discordance between lumpy's evidence (count) and svtyper's evidence. We need to figure out why and test alternate tools.
 
- 
+3. testing other tools
 
-1. Setup
+In particular, there are two additional tools we would like you to test.
+Stix: `https://github.com/ryanlayer/stix`
+Delly: `https://github.com/dellytools/delly`
+
+run these methods on the data given and any test data they provide. Then compare the results to our expectations in a manner similar to above.
+
+
+4. Working on the SV genotyping pipeline
+
+We currently have a semi-working implementation of sv genotyping with svtyper in the single cell pipeline.
 
 Follow the directions for setup under the header `SV_Genotyping` on this documentation page: 
-`https://single-cell-pipeline-da.readthedocs.io/en/latest/`. You can skip the steps regarding setting-up of reference data. Once you have run the pipeline successfully with the test dataset, run 
-```
-python compare.py x y
-```
-
-
-2. Exploring Other Tools
-
-Test other tools on the commandline using the test data.
-
-svtyper:
-```buildoutcfg
-svtyper -B test.bam -V lumpy.vcf -o genotyped.vcf
-```
-
-module load singularity
-
-singularity run --bind /admin --bind /common --bind /juno/work  docker://docker.io/singlecellpipeline/svtyper:v0.0.1 -B -i -o
+`https://single-cell-pipeline-da.readthedocs.io/en/latest/`. You can skip the steps regarding setting-up of reference data. 
 
