@@ -1,2 +1,62 @@
-# sv_genotyping_hackathon
-hackathon project for single cell structural variant genotyping
+# SV Genotyping in the Single Cell Pipeline
+One analysis we are interested in having in the single cell pipeline is structural variant (SV) genotyping. We currently have a solution, but it doesn't match expectations on datasets with reasonably sure ground truths. Your task will be to explore other possible SV genotypers, compare them to our current solution with test datasets and improve the current solution in the single cell pipeline.
+
+Some useful links.
+
+1. Running Svtyper on the commandline to 
+
+A good first step will be to run svtyper from the commandline using a docker container to get familiar with the expected inputs and outputs of an sv genotyper. 
+all the data you will need is in `/juno/work/shah/abramsd/sv-genotyping-hackathon`.
+Follow these steps to run svtyper:
+```buildoutcfg
+module load singularity
+
+singularity run --bind /admin --bind /common --bind /juno/work  docker://docker.io/singlecellpipeline/svtyper:v0.0.1 svtyper -B SA535X4XB05649-A98261A-R06-C22.bam -i SA535X4XB05649-A98261A-R06-C22_lumpy.vcf -o genotyped.vcf
+```
+The genotypes for the data are in `genotyped.vcf`. 
+
+2. Comparing the results to our expectations
+
+In the same directory, there is also `compare.py`, run it with the outputs from the previous run and the `lumpy_evidence` file, which contains the number of reads for each variant at every cell, to compare the read evidences provided originally by lumpy and then given by svtyper. This is how to check if an sv genotyper is working.
+
+output:
+```buildoutcfg
+    breakpoint_id                         cell_id  count  svtyper_evidence
+0               4  SA535X4XB05649-A98261A-R06-C22      2                 1
+1              69  SA535X4XB05649-A98261A-R06-C22      1                 3
+2             103  SA535X4XB05649-A98261A-R06-C22      1                 0
+3             114  SA535X4XB05649-A98261A-R06-C22      2                 1
+4             378  SA535X4XB05649-A98261A-R06-C22     52               245
+..            ...                             ...    ...               ...
+173          8974  SA535X4XB05649-A98261A-R06-C22      1                38
+174          8993  SA535X4XB05649-A98261A-R06-C22      6               172
+175          9001  SA535X4XB05649-A98261A-R06-C22      1                36
+176          9009  SA535X4XB05649-A98261A-R06-C22      1                83
+177          9015  SA535X4XB05649-A98261A-R06-C22      1                65
+```
+As you can see, theres an incredible amount of discordance between lumpy's evidence (count) and svtyper's evidence. We need to figure out why and test alternate tools.
+
+ 
+
+1. Setup
+
+Follow the directions for setup under the header `SV_Genotyping` on this documentation page: 
+`https://single-cell-pipeline-da.readthedocs.io/en/latest/`. You can skip the steps regarding setting-up of reference data. Once you have run the pipeline successfully with the test dataset, run 
+```
+python compare.py x y
+```
+
+
+2. Exploring Other Tools
+
+Test other tools on the commandline using the test data.
+
+svtyper:
+```buildoutcfg
+svtyper -B test.bam -V lumpy.vcf -o genotyped.vcf
+```
+
+module load singularity
+
+singularity run --bind /admin --bind /common --bind /juno/work  docker://docker.io/singlecellpipeline/svtyper:v0.0.1 -B -i -o
+
