@@ -52,3 +52,15 @@ We currently have a semi-working implementation of sv genotyping with svtyper in
 Follow the directions for setup under the header `SV_Genotyping` on this documentation page: 
 `https://github.com/DouglasAbrams/single_cell_pipeline/blob/docs_merge/docs/source/index.md`. You can skip the steps regarding setting-up of reference data. 
 
+## Additional references
+
+Paragraph: a graph based sv genotyper.  Untested on cancer genomes. From illumina.
+https://genomebiology.biomedcentral.com/articles/10.1186/s13059-019-1909-7
+
+vg toolkit: another graph based sv genotyper using a graph toolkit.
+https://genomebiology.biomedcentral.com/articles/10.1186/s13059-020-1941-7
+
+SMRT-SV: a long read sv caller that also has a genotyper for short reads.
+https://github.com/EichlerLab/smrtsv2
+
+
